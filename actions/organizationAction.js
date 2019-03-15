@@ -1,5 +1,5 @@
 import OrganizationApi from '../api/organizationApi';
-import { GET_ORGS, GET_ORG } from '../types'
+import { GET_ORGS, GET_ORG, SAVE_ORG } from '../types'
 
 export const loadOrganization = data => {
     return {
@@ -15,9 +15,15 @@ export const loadSelectedOrg = data => {
     }
 }
 
+export const addNewOrg =  data => {
+    return {
+        type: SAVE_ORG,
+        data
+    }
+}
+
 export const getOrganization = () => dispatch => {
     return OrganizationApi.getOrganization().then(result => {
-        console.log('organization resut', result)
         const { status, data } = result;
         dispatch(loadOrganization(data))
     })
@@ -25,9 +31,18 @@ export const getOrganization = () => dispatch => {
 }
 
 export const selectOrganization = (data) => dispatch => {
-    console.log('dataaaaa', data)
     if ( data ) {
        return dispatch(loadSelectedOrg(data))
     } else {
     }
 }
+
+export const createOrganization = data => (dispatch, getState) => {
+    return OrganizationApi.createOrganization(data).then(result => {
+        let orgs = [...getState().organizations]
+        orgs.push(result.data.data)
+        return dispatch(loadOrganization(orgs))
+    })
+    .catch(err => console.log(err))
+}
+ 

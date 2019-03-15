@@ -11,6 +11,12 @@ class OrganizationApi {
                 .then(result => result)
                 .catch(err => err)
     }
+
+    static createOrganization (data) {
+        return axios.post(`${api}/organization`, data)
+                .then(result => result)
+                .catch(err => err)
+    }
 }
 
 export default OrganizationApi;

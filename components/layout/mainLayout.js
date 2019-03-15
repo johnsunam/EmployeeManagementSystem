@@ -15,11 +15,11 @@ const { SubMenu } = Menu;
           return <Layout>
                     <MainHeader />
                     <Content style={{ padding: '0 50px' }}>
-                    <Breadcrumb style={{ margin: '16px 0' }}>
+                    {this.props.sidebar ? <Breadcrumb style={{ margin: '16px 0' }}>
                         <Breadcrumb.Item>Home</Breadcrumb.Item>
                         <Breadcrumb.Item>List</Breadcrumb.Item>
                         <Breadcrumb.Item>App</Breadcrumb.Item>
-                    </Breadcrumb>
+                    </Breadcrumb>:""}
 
                     <Layout style={{ padding: '24px 0', background: '#fff' }}>
                     {this.props.sidebar ? <Sider width={200} style={{ background: '#fff' }}>

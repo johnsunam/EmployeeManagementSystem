@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getOrganization, selectOrganization } from '../actions/organizationAction'
+import { getOrganization, selectOrganization } from '../actions/organizationAction';
 import MainLayout from '../components/layout/mainLayout';
 import { Select, Divider, Icon, Button, Row, Col } from 'antd';
+import CreateOrganization from '../components/organization/createOrganization';
 import Link from 'next/link';
 import _ from 'underscore';
 
@@ -24,32 +25,36 @@ class HomePage extends Component {
   }
 
   render () {
-    console.log('home page',this.props)
+    const { organization } = this.props
     return (<MainLayout sidebar={false}>
-            <h2>Select Organization</h2>
+            <h2>{organization ? organization.name:'Select Organization'}</h2>
             <Row type="flex" justify="end">
               <Col span={4}>
-                {this.props.organization ? <Button type="primary">Go Organization Dasboard<Icon type="right" /></Button>:''}
+                {organization ? <Link href="employee"><Button type="primary">Go Organization Dasboard<Icon type="right" /></Button></Link>:''}
               </Col>
             </Row>
+
             <Row type="flex" justify="center">
             <Col span={6}>
                 <Select
-                    defaultValue=""
+                    defaultValue={organization ? organization._id:''}
                     style={{ width: 200 }}
                     dropdownRender={menu => (
                       <div>
                         {menu}
-                        <Divider style={{ margin: '4px 0' }} />
-                        <div style={{ padding: '8px', cursor: 'pointer' }}>
+                        {/* <Divider style={{ margin: '4px 0' }} /> */}
+                        {/* <div style={{ padding: '8px', cursor: 'pointer' }}>
                           <Icon type="plus" /> Add Organization
-                        </div>
+                        </div> */}
+                       
                       </div>
                     )}
                     onChange={this.handleChange}
                   >
+                  <Option  value={""}>Select Organization</Option>
                     {this.props.organizations.map(org => <Option key={org._id} value={org._id}>{org.name}</Option>)}
                   </Select>
+                  <CreateOrganization />
               </Col>
             </Row>
             
