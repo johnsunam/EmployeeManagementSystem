@@ -30,7 +30,7 @@ class HomePage extends Component {
             <h2>{organization ? organization.name:'Select Organization'}</h2>
             <Row type="flex" justify="end">
               <Col span={4}>
-                {organization ? <Link href="employee"><Button type="primary">Go Organization Dasboard<Icon type="right" /></Button></Link>:''}
+                {organization ? <Link href="users" as={`/${organization._id}/users`}><Button type="primary">Go Organization Dasboard<Icon type="right" /></Button></Link>:''}
               </Col>
             </Row>
 
