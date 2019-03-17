@@ -1,5 +1,6 @@
 import React from 'react';
 import { Table, Divider, Tag } from 'antd';
+import Link from 'next/link';
 const { Column, ColumnGroup } = Table;
 
 const CommonTable = props => {
@@ -16,9 +17,9 @@ const CommonTable = props => {
       key="action"
       render={(text, record) => (
         <span>
-          <a href="javascript:;">Invite {record.lastName}</a>
-          <Divider type="vertical" />
-          <a href="javascript:;">Delete</a>
+          <Link href={`/users/profile?user=${record._id}&org=${record.org}`} as={`users/${record._id}/profile`} params={{org: record.org, user: record._id}}><a>Invite {record.lastName}</a></Link>
+          {/* <Divider type="vertical" /> */}
+          {/* <a href="javascript:;">Delete</a> */}
         </span>
       )}
     />

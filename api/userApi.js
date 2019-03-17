@@ -12,6 +12,12 @@ class UserApi {
                 .catch(err => err)
     }
 
+    static getUserById (id) {
+        return axios.get(`${api}/user/${id}`)
+                .then(result => result)
+                .catch(err => err)
+    }
+
     static createUser (data) {
         return axios.post(`${api}/user`, data)
                 .then(result => result)

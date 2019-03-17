@@ -3,7 +3,7 @@ import {
     Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete,
   } from 'antd';
 import { connect } from 'react-redux';
-import { getUser } from '../../actions/userAction';
+import { createUser } from '../../actions/userAction';
 
 const { Option } = Select;
 
@@ -11,7 +11,7 @@ class PersonalForm extends Component {
     constructor (props) {
         super(props)
         this.state = {
-
+            // edit: props.edit ? true: false
         }
     }
 
@@ -22,8 +22,8 @@ class PersonalForm extends Component {
 
       this.props.form.validateFieldsAndScroll((err, values) => {
         if (!err) {
-            self.props.
-          console.log('Received values of form: ', self.props);
+            // self.props.createUser(values)
+          console.log('Received values of form: ', values);
         }
       });
     }
@@ -36,7 +36,8 @@ class PersonalForm extends Component {
                         getFieldDecorator={getFieldDecorator} 
                         lbl={'First Name'} 
                         property={{
-                            rules: [{required: true, message: "Please input you first name."}]
+                            initialValue: this.props.edit ? this.props.userDetail.firstName:'',
+                            rules: [{required: true, message: "PlonClick=ease input you first name."}]
                         }} 
                         nam={'firstName'}
                         />
@@ -44,6 +45,7 @@ class PersonalForm extends Component {
                         getFieldDecorator={getFieldDecorator} 
                         lbl={'Last Name'} 
                         property={{
+                            initialValue: this.props.edit ? this.props.userDetail.lastName:'',
                             rules: [{required: true, message: "Please input you last name."}]
                         }} 
                         nam={'lastName'}
@@ -53,6 +55,7 @@ class PersonalForm extends Component {
                           lbl={'Contact No'}
                           type="number"
                           property={{
+                            initialValue: this.props.edit ? this.props.userDetail.contact:'',
                             rules: [{required: true, message: "Please input you contact no."}]
                           }}
                           nam={'contact'}
@@ -62,6 +65,7 @@ class PersonalForm extends Component {
                           lbl={'Email'}
                           type={'email'}
                           property={{
+                            initialValue: this.props.edit ? this.props.userDetail.email:'',
                             rules: [
                               {type: 'email', message: "Input is not valid E-mail"},
                               {required: true, message: "Please input you contact no."}
@@ -73,13 +77,14 @@ class PersonalForm extends Component {
                         getFieldDecorator={getFieldDecorator} 
                         lbl={'Address'} 
                         property={{
+                          initialValue: this.props.edit ? this.props.userDetail.address:'',
                             // rules: [{required: true, message: "Please input you last name."}]
                         }} 
                         nam={'address'}
                         />
                         <Form.Item label="User Role">
                           {getFieldDecorator('role',{
-                            initialValue: 'admin'
+                            initialValue: this.props.edit ? this.props.userDetail.role:'admin',
                           })(
                             <Select style={{ width: 150 }}>
                             <Option value="admin">Admin</Option>
@@ -89,7 +94,7 @@ class PersonalForm extends Component {
                           
                         </Form.Item>
                         <Form.Item >
-                          <Button type="primary" htmlType="submit">Register</Button>
+                          <Button type="primary" htmlType="submit">{this.props.edit ?'Update':'Register'}</Button>
                         </Form.Item>
 
                 </Form>
@@ -109,4 +114,4 @@ class PersonalForm extends Component {
 
 const WrappedForm =  Form.create({name: 'personal'})(PersonalForm);
 
-export default connect(null,{ getUser })(WrappedForm)
+export default connect()(WrappedForm)

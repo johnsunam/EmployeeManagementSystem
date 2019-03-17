@@ -3,7 +3,6 @@ import withRedux from  'next-redux-wrapper';
 import { initStore } from '../store';
 import { Provider } from 'react-redux';
 import App, { Container } from 'next/app';
-import MainLayout from '../components/layout/mainLayout';
 
 class MyApp extends App {
     static async getInitialProps ({Component, ctx}) {

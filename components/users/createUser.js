@@ -55,7 +55,7 @@ class CreateUser extends Component {
           onOk={this.handleOk}
           onCancel={this.handleCancel}
         >
-            <RenderComponent changeSlide={this.changeSlide}/>
+            <RenderComponent />
         </Modal>
       </div>
     }
