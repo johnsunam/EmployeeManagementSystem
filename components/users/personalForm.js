@@ -56,7 +56,7 @@ class PersonalForm extends Component {
                         lbl={'First Name'} 
                         property={{
                             initialValue: this.props.edit ? this.props.userDetail.firstName:'',
-                            rules: [{required: true, message: "PlonClick=ease input you first name."}]
+                            rules: [{required: true, message: "Please input you first name."}]
                         }} 
                         nam={'firstName'}
                         />
