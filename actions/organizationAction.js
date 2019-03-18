@@ -31,9 +31,11 @@ export const getOrganization = () => dispatch => {
 }
 
 export const selectOrganization = (data) => dispatch => {
-    if ( data ) {
+    // if ( data ) {
        return dispatch(loadSelectedOrg(data))
-    } 
+  
+    // }
+
 }
 
 export const getOrganizationById = id => dispatch => {

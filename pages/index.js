@@ -29,14 +29,14 @@ class HomePage extends Component {
             <h2>{'Select Organization'}</h2>
             <Row type="flex" justify="end">
               <Col span={4}>
-                {organization ? <Link href={`users?org=${organization._id}`} as={`/${organization._id}/users`}><Button type="primary">Go Organization Dasboard<Icon type="right" /></Button></Link>:''}
+                {organization._id ? <Link href={`users?org=${organization._id}`} as={`/${organization._id}/users`}><Button type="primary">Go Organization Dasboard<Icon type="right" /></Button></Link>:''}
               </Col>
             </Row>
 
             <Row type="flex" justify="center">
             <Col span={6}>
                 <Select
-                    defaultValue={organization ? organization._id:''}
+                    defaultValue={organization._id ? organization._id:''}
                     style={{ width: 200 }}
                     dropdownRender={menu => (
                       <div>

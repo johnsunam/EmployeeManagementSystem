@@ -1,6 +1,6 @@
 import { GET_ORG, SAVE_ORG, SELECT_ORG } from '../types'
 
-export const SelectedOrgReducer = (state = null, action) => {
+export const SelectedOrgReducer = (state = {}, action) => {
 
     switch (action.type) {
         
