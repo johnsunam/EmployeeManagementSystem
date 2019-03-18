@@ -17,7 +17,6 @@ class HomePage extends Component {
 
   componentDidMount () {
     this.props.getOrganization()
-      .then(result => console.log('resullltlsss', result))
   }
 
   handleChange = value => {
@@ -27,10 +26,10 @@ class HomePage extends Component {
   render () {
     const { organization } = this.props
     return (<MainLayout sidebar={false}>
-            <h2>{organization ? organization.name:'Select Organization'}</h2>
+            <h2>{'Select Organization'}</h2>
             <Row type="flex" justify="end">
               <Col span={4}>
-                {organization ? <Link href="users" as={`/${organization._id}/users`}><Button type="primary">Go Organization Dasboard<Icon type="right" /></Button></Link>:''}
+                {organization ? <Link href={`users?org=${organization._id}`} as={`/${organization._id}/users`}><Button type="primary">Go Organization Dasboard<Icon type="right" /></Button></Link>:''}
               </Col>
             </Row>
 

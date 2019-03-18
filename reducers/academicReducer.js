@@ -1,14 +1,14 @@
-import { GET_ORGS, SAVE_ORG } from '../types'
+import { GET_ACADEMICS, SAVE_ACADEMIC } from '../types'
 
-export const OrganizationReducer = (state = [], action) => {
+export const AcademicReducer = (state = [], action) => {
 
     switch (action.type) {
-        case GET_ORGS: 
+        case GET_ACADEMICS: 
             return [
                 ...action.data
             ]
 
-        case SAVE_ORG: 
+        case SAVE_ACADEMIC: 
             return [
                 ...state,
                 {...action.data}

@@ -17,6 +17,12 @@ class OrganizationApi {
                 .then(result => result)
                 .catch(err => err)
     }
+
+    static getOrganizationById (id) {
+        return axios.get(`${api}/organization/${id}`)
+                .then(result => result)
+                .catch(err => err)
+    }
 }
 
 export default OrganizationApi;

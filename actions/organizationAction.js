@@ -33,8 +33,16 @@ export const getOrganization = () => dispatch => {
 export const selectOrganization = (data) => dispatch => {
     if ( data ) {
        return dispatch(loadSelectedOrg(data))
-    } else {
-    }
+    } 
+}
+
+export const getOrganizationById = id => dispatch => {
+    return OrganizationApi.getOrganizationById(id)
+                            .then(result => {
+                                dispatch(loadSelectedOrg(result.data))
+                                return result
+                            })
+                            .catch(err => console.log(err))
 }
 
 export const createOrganization = data => (dispatch, getState) => {

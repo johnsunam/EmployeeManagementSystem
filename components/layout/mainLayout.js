@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import MainHeader from '../common/header';
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 import Link from 'next/link';
+import { connect } from 'react-redux'; 
 // import {} from '../../actions/organizationAction';
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -15,11 +16,10 @@ const { SubMenu } = Menu;
           return <Layout>
                     <MainHeader />
                     <Content style={{ padding: '0 50px' }}>
-                    {this.props.sidebar ? <Breadcrumb style={{ margin: '16px 0' }}>
-                        <Breadcrumb.Item>Home</Breadcrumb.Item>
-                        <Breadcrumb.Item>List</Breadcrumb.Item>
-                        <Breadcrumb.Item>App</Breadcrumb.Item>
-                    </Breadcrumb>:""}
+                     {this.props.breadcrumb ? <Breadcrumb style={{ margin: '16px 0' }}>
+                        <Breadcrumb.Item><Link href='/'><a>Home</a></Link></Breadcrumb.Item>
+                        {this.props.organization ? <Breadcrumb.Item><Link href={`/${this.props.organization._id}/users`}><a>users</a></Link></Breadcrumb.Item>:""}
+                    </Breadcrumb>:''}
 
                     <Layout style={{ padding: '24px 0', background: '#fff' }}>
                     {this.props.sidebar ? <Sider width={200} style={{ background: '#fff' }}>
@@ -43,5 +43,11 @@ const { SubMenu } = Menu;
                 </Layout>
       }
   }
+  
+  const mapStateToProps = state => {
+      return {
+          organization: state.organization
+      }
+  }
 
-  export default MainLayout;
+  export default connect(mapStateToProps)(MainLayout);

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Layout, Menu } from 'antd';
 import Head from '../head';
+import { connect } from 'react-redux';
 
 const {
     Header 
@@ -9,8 +10,10 @@ const {
 const MainHeader = props => {
     return <Header className="header">
     <Head />
-    <div className="logo" />
-    <Menu
+    <div className="logo" style={{color: 'white', fontSize: 35}}>
+    {props.organization ? props.organization.name:''}
+    </div>
+    {/* <Menu
         theme="dark"
         mode="horizontal"
         defaultSelectedKeys={['2']}
@@ -19,8 +22,13 @@ const MainHeader = props => {
         <Menu.Item key="1">nav 1</Menu.Item>
         <Menu.Item key="2">nav 2</Menu.Item>
         <Menu.Item key="3">nav 3</Menu.Item>
-    </Menu>
+    </Menu> */}
 </Header>
 }
 
-export default MainHeader
+const mapStateToProps = state => {
+    return {
+        organization: state.organization
+    }
+}
+export default connect(mapStateToProps)(MainHeader)

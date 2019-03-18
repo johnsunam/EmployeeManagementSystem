@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { Modal, Button } from 'antd';
 import PersonalForm from './personalForm';
-import AcademicForm from './academicForm';
-import ExperienceForm from './experienceForm';
 import { connect } from 'react-redux';
 
-const forms = {Personal: PersonalForm, Academic: AcademicForm, Experience: ExperienceForm}
 
 class CreateUser extends Component {
 
@@ -21,9 +18,9 @@ class CreateUser extends Component {
       this.setState({form})
     }
 
-    showModal = () => {
+    toggleModal = () => {
       this.setState({
-        visible: true,
+        visible: !this.state.visible,
       });
     }
   
@@ -44,9 +41,8 @@ class CreateUser extends Component {
   
 
     render () {
-        let RenderComponent = forms[this.state.form]
         return <div>
-        <Button type="primary" onClick={this.showModal}>
+        <Button type="primary" onClick={this.toggleModal}>
           Add User
         </Button>
         <Modal
@@ -55,7 +51,7 @@ class CreateUser extends Component {
           onOk={this.handleOk}
           onCancel={this.handleCancel}
         >
-            <RenderComponent />
+            <PersonalForm {...this.props} toggleModal={this.toggleModal}/>
         </Modal>
       </div>
     }

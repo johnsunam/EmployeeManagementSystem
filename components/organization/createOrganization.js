@@ -38,13 +38,11 @@ class CreateOrganization extends Component {
       }
     
       handleCancel = (e) => {
-        console.log(e);
         this.setState({
           visible: false,
         });
       }
     render () {
-        console.log('statesss', this.state)
         return<div style={{ padding: '8px', cursor: 'pointer' }}>
         {/* <span ><Icon type="plus" /> </span> */}
         <Button onClick={this.showModal} type="primary" shape="round" icon="plus" size={'large'}>Add Organization</Button>

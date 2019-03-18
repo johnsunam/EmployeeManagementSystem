@@ -4,3 +4,7 @@ export const GET_ORG = 'GET_ORG';
 export const GET_USERS = 'GET_USERS';
 export const SAVE_USER = 'SAVE_USER';
 export const GET_USER = 'GET_USER';
+export const GET_ACADEMICS = 'GET_ACADEMICS';
+export const SAVE_ACADEMIC = 'SAVE_ACADEMIC';
+export const GET_EXPERIENCES = 'GET_EXPERIENCES';
+export const SAVE_EXPERIENCE = 'SAVE_EXPERIENCE';

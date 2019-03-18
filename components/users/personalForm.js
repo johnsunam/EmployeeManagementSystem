@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {
-    Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete,
+    Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete, message
   } from 'antd';
 import { connect } from 'react-redux';
-import { createUser } from '../../actions/userAction';
+import { createUser, updateUser } from '../../actions/userAction';
 
 const { Option } = Select;
 
@@ -22,6 +22,25 @@ class PersonalForm extends Component {
 
       this.props.form.validateFieldsAndScroll((err, values) => {
         if (!err) {
+          values.org = self.props.organization._id
+          if (self.props.edit) {
+              self.props.updateUser(values)
+                        .then(result => {
+                          self.props.form.resetFields()
+                          self.props.editState();
+                        })
+                        .catch(err => console.log(err))
+          } else {
+            self.props.createUser(values)
+                        .then(result => {
+                          self.props.form.resetFields()
+                          self.props.toggleModal()
+                        })
+                        .catch(err => {
+                          message.error(err.response.data.message)
+                          
+                        })
+          }
             // self.props.createUser(values)
           console.log('Received values of form: ', values);
         }
@@ -95,6 +114,8 @@ class PersonalForm extends Component {
                         </Form.Item>
                         <Form.Item >
                           <Button type="primary" htmlType="submit">{this.props.edit ?'Update':'Register'}</Button>
+                          {this.props.edit ? <Button type="primary" onClick={() => this.props.editState()} htmlType="button" style={{marginLeft: 10}}>Cancel</Button>:""}
+
                         </Form.Item>
 
                 </Form>
@@ -103,15 +124,19 @@ class PersonalForm extends Component {
 
 
  export const FormItem = props => {
-    const { getFieldDecorator, property, nam, type } = props
+    const { getFieldDecorator, property, nam, type, placeholder } = props
     return <Form.Item label={props.lbl}>
     {getFieldDecorator(nam, property)(
-      <Input type={type}/>
+      <Input type={type} placeholder={placeholder ? placeholder:''}/>
     )}
   </Form.Item>
 }
 
 
 const WrappedForm =  Form.create({name: 'personal'})(PersonalForm);
-
-export default connect()(WrappedForm)
+const mapStateToProps = state => {
+  return {
+    organization: state.organization
+  }
+}
+export default connect(mapStateToProps, { updateUser, createUser})(WrappedForm)

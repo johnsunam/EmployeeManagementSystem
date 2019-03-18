@@ -28,21 +28,18 @@ class Profile extends Component {
         }
     }
 
-
     selectComponent = (key) => {
         this.setState({selectedComponent: key})
     }
 
     componentDidMount () {
-        console.log('profile props', this.prop)
         this.props.getUserById(this.props.user)
     }
 
     render () {
-        console.log('profile props', this.props)
         let RenderedComponent = Components[this.state.selectedComponent]
         return <div>
-            <MainLayout sidebar={true} menus={menu} selectComponent={this.selectComponent} >
+            <MainLayout sidebar={true} menus={menu} selectComponent={this.selectComponent} breadcrumb={true}>
                 <RenderedComponent userDetail={this.props.userDetail}/>
             </MainLayout>
         </div>

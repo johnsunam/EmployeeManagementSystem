@@ -5,13 +5,17 @@ import { OrganizationReducer } from './reducers/organizationReducer';
 import { SelectedOrgReducer } from './reducers/selectedOrgReducer';
 import { UserReducer } from './reducers/userReducer';
 import { SelectedUserReducer } from './reducers/selectedUserReducer';
+import { AcademicReducer } from './reducers/academicReducer';
+import { ExperienceReducer } from './reducers/experienceReducer';
 
 export const initStore = (initialState = {}) => {
     const reducers = combineReducers({
       organizations: OrganizationReducer,
       organization: SelectedOrgReducer,
       users: UserReducer,
-      user: SelectedUserReducer
+      user: SelectedUserReducer,
+      academics: AcademicReducer,
+      experiences: ExperienceReducer
     });
 
     let env = process.env.NODE_ENV || 'development';
