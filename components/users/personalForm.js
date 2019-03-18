@@ -83,6 +83,7 @@ class PersonalForm extends Component {
                           getFieldDecorator= {getFieldDecorator}
                           lbl={'Email'}
                           type={'email'}
+                          disabled= {this.props.edit ?true:false}
                           property={{
                             initialValue: this.props.edit ? this.props.userDetail.email:'',
                             rules: [
@@ -127,7 +128,7 @@ class PersonalForm extends Component {
     const { getFieldDecorator, property, nam, type, placeholder } = props
     return <Form.Item label={props.lbl}>
     {getFieldDecorator(nam, property)(
-      <Input type={type} placeholder={placeholder ? placeholder:''}/>
+      <Input type={type} placeholder={placeholder ? placeholder:''} disabled={props.disabled ? true: false}/>
     )}
   </Form.Item>
 }
